@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebAppLong.Models.NhanVien>
+
+
+<h1>Danh sách nhân viên</h1>
+
+<p>
+    <a onclick="showInPopup('@Url.Action("Create","NhanVien",null,Context.Request.Scheme)','Thêm nhân viên mới')" class="btn btn-success text-white">Thêm nhân viên</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th style="width:200px">
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel)
+            </th>
+            
+            <th>
+                Thực hiện
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel)
+                </td>
+                
+                <td style="width:200px">
+                    <a onclick="showInPopup('@Url.Action("Edit", "NhanVien", new { id = item.Id},Context.Request.Scheme)', 'Cập nhật thông tin người dùng')" class="btn btn-info text-white" style="width:80px">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline" >
+                        <input type="submit" value="Delete" class="btn btn-danger" style="width:80px"/>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
